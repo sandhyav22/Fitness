@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+     
+      position: relative;
+      z-index: 10;
+    }
+
+    /* LOGO */
+.logo img {
+  width: 100px; /* adjust as needed */
+ 
+}
+
+
+    /* CENTER MENU */
+    .menu a.active {
+      color: #FF3B30;
+    }
+    .menu {
+      display: flex;
+      gap: 25px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: black;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* REGISTER BUTTON */
+    .register-btn {
+      padding: 8px 16px;
+      background: #FF3B30;
+      color: white;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      
+    }
+
+    /* SEARCH BAR */
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      background: white;
+  
+     
+    }
+    .search-bar input {
+      width: 80%;
+      max-width: 450px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    /* MOBILE MENU ICON */
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      .menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        display: none;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-align: center;
+      }
+      .menu a {
+        padding: 10px 0;
+      }
+      .menu.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .register-btn {
+        display: none;
+      }
+    }
+  .company-name {
+      font-family: "Brush Script MT", cursive;
+      font-size: 26px;
+      margin-top: 8px;
+      padding: 0;
+      color: #555;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      border: none;
+      display: block;
+    }
+  </style>
+  <!-- Font Awesome -->
+   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/logo.png" alt="Logo" />
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="subscription.html">Subscriptions</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+    <a href="#" class="register-btn" onclick="openLogin()">Register</a>
+  </nav>
+<div id="loginModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+
+    <div class="modal-left">
+      <h2>Register Free!</h2>
+      <!-- <form> changed to include onsubmit -->
+      <form onsubmit="goToLoginPage(event)">
+        <input type="email" placeholder="Enter your e-mail" required>
+        <input type="password" placeholder="Password" required>
+        <!-- keep type="submit" but remove onclick -->
+       <button type="button" class="login-btn" onclick="goToLoginPage(event)">Login</button>
+        <div class="forgot">
+          <a href="#">Forgot your password?</a>
+        </div>
+
+        <div class="divider">Sign Up Using</div>
+
+        <div class="social-icons">
+          <button type="button">
+            <img src="image/google-removebg-preview.png" alt="Google">
+          </button>
+          <button type="button">
+            <img src="image/facebook-removebg-preview.png" alt="Facebook">
+          </button>
+          <button type="button">
+            <img src="image/instagram-removebg-preview.png" alt="Instagram">
+          </button>
+          <button type="button">
+            <img src="image/twitter-removebg-preview (1).png" alt="Twitter">
+          </button>
+        </div>
+
+        <p class="create-account">
+          Don’t have an account?
+          <a href="#" onclick="switchToSignup()">Create New Account</a>
+        </p>
+      </form>
+    </div>
+
+    <div class="modal-right">
+      <img src="image/Frame 8.jpg" alt="image">
+    </div>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal" style="display:none;">
+  <div class="modal-content1">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+
+    <div class="modal-right1">
+      <h2>Sign Up</h2>
+      <!-- use onsubmit here too -->
+      <form onsubmit="goToSignupPage(event)">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <!-- keep type="submit" but remove onclick -->
+        <button type="button" class="login-btn" onclick="goToSignupPage(event)">Sign Up</button>
+
+        <p class="create-account">
+          Already have an account?
+          <a href="#" onclick="switchToLogin()">Log in</a>
+        </p>
+      </form>
+    </div>
+
+    <div class="modal-left1">
+      <img src="image/a1.png" alt="imag2">
+    </div>
+  </div>
+</div>
+
+<script>
+  // ✅ Open modals
+  function openLogin() {
+    document.getElementById("loginModal").style.display = "flex";
+  }
+
+  function openSignup() {
+    document.getElementById("signupModal").style.display = "flex";
+  }
+
+  // ✅ Switch between modals
+  function switchToSignup() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("signupModal").style.display = "flex";
+  }
+
+  function switchToLogin() {
+    document.getElementById("signupModal").style.display = "none";
+    document.getElementById("loginModal").style.display = "flex";
+  }
+
+  // ✅ Close modals
+  function closeModal() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("signupModal").style.display = "none";
+  }
+
+  // ✅ Close modal when clicking outside
+  window.onclick = function(event) {
+    if (event.target.classList.contains("modal")) {
+      closeModal();
+    }
+  }
+
+  // ✅ Redirect after login or signup
+  function goToLoginPage(event) {
+    event.preventDefault(); // Prevent form reload
+    window.location.href = "newindex.html"; // Redirect to your page
+  }
+
+  function goToSignupPage(event) {
+    event.preventDefault();
+    window.location.href = "newindex.html";
+  }
+</script>
+
+  <div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search Programs" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid black; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">weight loss program</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    // Replace value on focus
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('searchInput');
+      input.addEventListener('focus', function() {
+        input.value = 'weight loss program';
+      });
+    });
+  </script>
+</body>
+</html>
+<div class="hero">
+    <img class="hero-bg" src="image/banner1.jpg" alt="Banner">
+
+
+    <div class="hero-content">
+        <h1>Transform Your Body</h1>
+        <p style="font-size: 28px; font-weight: 500;">Lead Your Life</p>
+
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="window.location.href='.html'">Start Journey</button>
+            <button class="secondary-btn">Enquiry →</button>
+        </div>
+
+        <div class="hero-rating">
+            <img class="avatar" src="image/rating.png">
+   <div class="plus-circle">+</div>
+            <span class="rating-text"> 4.9k Ratings+<br><small>Trusted by 50k customers</small></span>
+        </div>
+        <p>A personalized fitness journey designed to help you build strength burn fat and boost confidence -<br>
+        with expert trainers proven programs and real results.</p>
+    </div>
+</div>
+<br>
+<section class="features-section">
+    <h2 class="section-title">Why Choose Us</h2>
+
+  <div class="features-container">
+
+    <div class="feature-box">
+        <div class="feature-card">
+            <img src="image/img1.png" alt="Gift 1">
+            <h3 class="feature-title">Expert Trainers</h3>
+        </div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-card">
+            <img src="image/img2.png" alt="Gift 2">
+            <h3 class="feature-title">Flexible Options</h3>
+        </div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-card">
+            <img src="image/img3.png" alt="Gift 3">
+            <h3 class="feature-title">Cutting-Edge Tracking</h3>
+        </div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-card">
+            <img src="image/img4.png" alt="Gift 4">
+            <h3 class="feature-title">Community Support</h3>
+        </div>
+    </div>
+
+</div>
+
+
+    </div>
+</section>
+<br>
+<div class="info-flex">
+    <img src="image/a1.png" alt="Example">
+
+    <div class="info-text">
+        <h3>About Us</h3>
+        <p>
+           We're passionate about helping you become the strongest<br>
+           version of yourself With certified trainers science-backed <br>
+           programs and a community that motivates you every step of <br>
+           the way we make fitness simple accessible and effective - for <br>
+           everyone.
+        </p>
+    </div>
+</div>
+<br>
+<section class="products-section">
+    <h2 class="main-heading">Popular Programs</h2>
+
+    <div class="products-container">
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+            <h3 class="product-title">Yoga for Beginers</h3>
+            <p class="product-subtitle">6 weeks</p>
+            <img src="image/p1.png" class="product-img">
+
+            <h3 class="product-title">Improve Flexibility</h3>
+            <p class="product-subtitle">Trainer : Thompson</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Start now</button>
+        
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+             <h3 class="product-title">HIIT & Cross fit</h3>
+            <p class="product-subtitle">6 weeks</p>
+            <img src="image/p2.png" class="product-img">
+            <h3 class="product-title">Improve Flexibility</h3>
+            <p class="product-subtitle">Trainer : Thompson</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Shop Now</button>
+           
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+             <h3 class="product-title">Nutrition for beginers</h3>
+            <p class="product-subtitle">6 weeks</p>
+            <img src="image/p3.png" class="product-img">
+            <h3 class="product-title">Improve Flexibility</h3>
+            <p class="product-subtitle">Trainer : Thompson</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Shop Now</button>
+               
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+             <h3 class="product-title">Cardio</h3>
+            <p class="product-subtitle">6 weeks</p>
+            <img src="image/img1.png" class="product-img">
+
+            <h3 class="product-title">Improve Flexibility</h3>
+            <p class="product-subtitle">Trainer : Thompson</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn">Shop Now</button>
+              
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<br>
+<section class="subscription-section">
+    <h2 class="section-title">Subscription</h2>
+
+    <div class="subscription-container">
+
+        <!-- BASIC PLAN -->
+        <div class="sub-card">
+            <h3>Basic Plan</h3>
+            <p class="price">$7/Mon</p>
+
+            <div class="trial black">No Free Trail</div>
+
+            <ul class="features">
+                <li><span class="yes">✔</span> Limited Access only</li>
+                <li><span class="no">✘</span> Group challenges</li>
+                <li><span class="no">✘</span> All Resources</li>
+                <li><span class="no">✘</span> Nutrition tracking</li>
+                <li><span class="no">✘</span> Trainer support</li>
+            </ul>
+
+            <div class="btn-row">
+                <button class="sub-btn">Subscribe Now</button>
+                <button class="detail-btn">View detail</button>
+            </div>
+        </div>
+
+        <!-- PREMIUM PLAN -->
+        <div class="sub-card">
+            <h3>Premium Plan</h3>
+            <p class="price premium">$39/Mon</p>
+
+            <div class="trial blue">14 Days Free Trail</div>
+
+            <ul class="features">
+                <li><span class="yes">✔</span> Access to advanced workouts</li>
+                <li><span class="yes">✔</span> Group challenges</li>
+                <li><span class="yes">✔</span> All Resources</li>
+                <li><span class="yes">✔</span> Nutrition tracking</li>
+                <li><span class="yes">✔</span> Trainer support</li>
+            </ul>
+
+            <div class="btn-row">
+                <button class="sub-btn">Subscribe Now</button>
+                <button class="detail-btn">View detail</button>
+            </div>
+        </div>
+
+        <!-- STANDARD PLAN -->
+        <div class="sub-card">
+            <h3>Standard Plan</h3>
+            <p class="price standard">$19/Mon</p>
+
+            <div class="trial red">7 Days Free Trail</div>
+
+            <ul class="features">
+                <li><span class="yes">✔</span> Access to advanced workouts</li>
+                <li><span class="yes">✔</span> Group challenges</li>
+                <li><span class="no">✘</span> All Resources</li>
+                <li><span class="no">✘</span> Nutrition tracking</li>
+                <li><span class="no">✘</span> Trainer support</li>
+            </ul>
+
+            <div class="btn-row">
+                <button class="sub-btn">Subscribe Now</button>
+                <button class="detail-btn">View detail</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+<br>
+<section class="trainer-section">
+    <h2 class="trainer-title">Our Trainers</h2>
+
+    <div class="trainer-container">
+
+        <!-- Card 1 -->
+        <div class="trainer-card">
+            <img src="image/t1.png" alt="Trainer 1">
+            <h3 class="trainer-name">Emma Thompson</h3>
+            <p class="trainer-specialty"><strong>Specialty:</strong> Nutrition & Weight Loss</p>
+            <p class="trainer-cert"><strong>Certifications:</strong> ACE Certified Specialist</p>
+             <p class="trainer-cert"><strong>Experience:</strong> 7 years in nutrition + training</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="trainer-card">
+            <img src="image/t2.png" alt="Trainer 2">
+            <h3 class="trainer-name">John Carter</h3>
+            <p class="trainer-specialty"><strong>Specialty:</strong> Yoga & Mindfulness</p>
+            <p class="trainer-cert"><strong>Certifications:</strong> Yoga Alliance RYT-100</p>
+            <p class="trainer-cert"><strong>Experience:</strong> 6 Years in holistic wellness</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="trainer-card">
+            <img src="image/t3.png" alt="Trainer 3">
+            <h3 class="trainer-name">Sophiya Mart</h3>
+            <p class="trainer-specialty"><strong>Specialty:</strong> Nutrition & Weight Loss</p>
+            <p class="trainer-cert"><strong>Certifications:</strong> ACE Certified Specialist</p>
+            <p class="trainer-cert"><strong>Experience:</strong> 7 years in nutrition + training</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="trainer-card">
+            <img src="image/t4.png" alt="Trainer 4">
+            <h3 class="trainer-name">David Thompson</h3>
+            <p class="trainer-specialty"><strong>Specialty:</strong> HIIT & Crossfit</p>
+            <p class="trainer-cert"><strong>Certifications:</strong> Crossfit Level 2 Coach</p>
+            <p class="trainer-cert"><strong>Experience:</strong> 10 years in functional fitness</p>
+        </div>
+
+    </div>
+</section>
+
+<br>
+<section class="faq-section">
+    <h2 class="faq-heading">Frequently Asked Questions(FAQ)</h2>
+
+    <div class="faq-box">
+        <div class="faq-item">
+            <h3 class="faq-question">1. Do I need to be fit before joining? <span style="margin-left: 750px;">v</span></h3>
+            <p class="faq-answer">Not all all! Our programs are designed for all levels - from beginners to advanced athletes.<br>
+            Trainers adjust workouts based on your ability.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">2. What types of classes do you offer? <span style="margin-left: 750px;">v</span></h3>
+            <p class="faq-answer">we offer a wide range: HIIT, Strength Training, Yoga, Pilates, CrossFit, Spin ZUmba, Boxing,<br>
+            and more.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3 class="faq-question">3. Can I try a class before committing?<span style="margin-left: 750px;">v</span></h3>
+            <p class="faq-answer">Yes! We offer a free trial class so you can experience our workouts before signing up.</p>
+        </div>
+
+            <div class="faq-item">
+            <h3 class="faq-question">4. What equipment do I need for online classes ?<span style="margin-left: 750px;">v</span></h3>
+            <p class="faq-answer">Most classes require just a mat and comfortable workout gear. Some strength classes may <br>
+            recommend dumbbells or resistance bands.</p>
+        </div>
+
+    </div>
+</section>
+<br>
+
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 - Logo -->
+        <div class="footer-col">
+            <img src="image/logo.png" class="footer-logo" alt="Logo">
+        </div>
+
+        <!-- Column 2 - About Us -->
+        <div class="footer-col">
+            <h3>About Us</h3>
+            <ul>
+                <li>Who We Are</li>
+                <li>Our Mission</li>
+                <li>How It Works</li>
+                <li>Success</li>
+                <li>Courses</li>
+            </ul>
+        </div>
+
+        <!-- Column 3 - Quick Links -->
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Browse</li>
+                <li>Packages</li>
+                <li>Categories</li>
+                <li>Support</li>
+                <li>Blog</li>
+            </ul>
+        </div>
+
+        <!-- Column 4 - Feature -->
+        <div class="footer-col">
+            <h3>Feature</h3>
+            <ul>
+                <li>HIIT</li>
+                <li>Strength Yoga</li>
+                <li>Cardio</li>
+                <li>Cycling</li>
+            </ul>
+        </div>
+
+        <!-- Column 5 - Contact Info -->
+        <div class="footer-col">
+            <h3>Contact & Social</h3>
+            <p>123 Saik Street,Chennai,TN</p>
+            <p>+91-7867980-688</p>
+            <p>Fitness@Fitnesscenter.com</p>
+
+            
+        </div>
+
+        <!-- Column 6 - Social Media -->
+        <div class="footer-col">
+          <img src="image/logo2.png" class="footer-img" alt="Footer Image">
+            <h3>Follow Us</h3>
+            <div class="footer-social">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-google"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Fitness center. All rights reserved.<br>
+        <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

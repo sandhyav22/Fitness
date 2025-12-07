@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>booking</title>
+<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container{
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            margin-top: 40px;
+        }
+
+        .plan-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            padding-bottom: 40px;
+        }
+
+        .left-section{
+            width: 50%;
+        }
+
+        .right-checks{
+            width: 55%;
+            margin-top: 180px;
+        }
+
+        .trial-btn {
+            background: #1c7ed6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            width: 200px;
+
+        }
+
+        .subscribe-btn {
+            background: red;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 5px 0;
+            font-size: 15px;
+        }
+
+        .payment-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            margin-left: 40%;
+           
+        }
+
+        .options {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .option-item{
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .arrow{
+            transition: .3s;
+        }
+
+        .rotate{
+            transform: rotate(180deg);
+        }
+
+        @media(max-width: 768px){
+            .plan-box{
+                flex-direction: column;
+            }
+
+            .left-section,
+            .right-checks{
+                width: 100%;
+            }
+        }
+        .extra-features {
+    margin-top: 25px;
+    margin-left: auto;
+    width: 45%;
+}
+
+.option-item {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px 5px;
+}
+
+.option-item:hover {
+    background: #eef5ff;
+    border-radius: 5px;
+}
+
+.card-form {
+    display: none;
+    margin-top: 15px;
+    margin-left: 60%;
+    padding: 15px;
+    background: #f8f9fc;
+    border-radius: 10px;
+    animation: fadeIn .4s ease-in-out;
+}
+
+/* Form fields layout */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.proceed-btn {
+    width: 100%;
+    background: #FF0B03;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.proceed-btn:hover {
+    background: #bd7f6d;
+}
+
+/* Mobile responsive */
+@media(max-width: 700px){
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-5px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+#card-form {
+    margin-top: 15px;
+}
+.success-box {
+    display: none;
+    background:#d5ffdb;
+    color:black;
+    padding:15px;
+    margin-top:15px;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    animation: fadeIn 0.4s ease-in-out;
+    text-align:center;
+    height: 200px;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(-10px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+    </style>
+
+
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/logo.png" alt="Logo" />
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="subscription.html">Subscriptions</a>
+      <a href="blogs.html"  class="active">Blogs</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+ <div class="nav-icons">
+        <img src="image/pp (1).png" class="icon profile" alt="Profile" id="profilePic">
+        
+        <div class="popup-menu" id="popupMenu">
+    <h3>My Accounts</h3>
+    <button class="act-btn">
+    <a href="account.html">Personal Information</a>
+    </button>
+    <button class="act-btn">
+    <a href="program.html">My Program</a>
+    </button>
+    <button class="act-btn">
+    <a href="password.html">Password Manager</a>
+    </button>
+    <button class="act-btn">
+    <a href="logout.html">Logout</a>
+    </button>
+</div>
+<script>
+    const profilePic = document.getElementById('profilePic');
+    const popupMenu = document.getElementById('popupMenu');
+
+    // Toggle popup on click
+    profilePic.addEventListener('click', () => {
+        popupMenu.classList.toggle('show');
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!profilePic.contains(e.target) && !popupMenu.contains(e.target)) {
+            popupMenu.classList.remove('show');
+        }
+    });
+</script>
+        <div class="icon-container">
+  <a href="wishlist.html" class="icon-wrapper" onclick="toggleDot('heartDot', 'heartIcon')">
+    <i class="fa-regular fa-heart icon" id="heartIcon"></i>
+    <span class="notify-dot" id="heartDot"></span>
+  </a>
+
+
+</div>
+<script>
+function toggleDot(dotId, iconId) {
+  const dot = document.getElementById(dotId);
+  const icon = document.getElementById(iconId);
+
+  if (dot.style.display === "block") {
+    dot.style.display = "none";
+    icon.classList.remove("active-heart", "active-cart");
+  } else {
+    dot.style.display = "block";
+    icon.classList.add(iconId === "heartIcon" ? "active-heart" : "active-cart");
+  }
+}
+</script>
+         <button id="notifyBtn" class="notify-btn">
+        <i class="fa-regular fa-bell icon"></i>
+        </button>
+    </div>
+    <!-- Popup Modal -->
+  <div id="notificationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="notification-box">
+       <h3>Program Notification Messages</h3>
+        
+          <p>1.New Program Available<br>
+            New program Alert!<br>
+            Advanced fitneswellness Techniques" is now live. Start learning the latest in worldwide and user flows today.
+        <p>
+      </div>
+    </div>
+  </div>
+ 
+     <script>
+    const modal = document.getElementById("notificationModal");
+    const btn = document.getElementById("notifyBtn");
+    const closeBtn = document.querySelector(".close");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  </script>
+
+  </nav>
+
+<div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search Programs" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid black; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">weight loss program</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    // Replace value on focus
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('searchInput');
+      input.addEventListener('focus', function() {
+        input.value = 'weight loss program';
+      });
+    });
+  </script>
+
+
+<div class="container">
+
+    <div class="plan-box">
+
+        <!-- LEFT SIDE -->
+        <div class="left-section">
+            <h2>Premium Plan</h2>
+            <button class="trial-btn" style="margin-left: 50px;">14 Days Free Trial</button>
+            
+            <h3 style="color:#1c7ed6; margin-top:20px;">$39 / Month</h3>
+
+            <button class="subscribe-btn">Subscribe Now</button>
+
+            <h3 style="margin-top:20px; color:#d6336c;">Trainer : Sofiya Thomas</h3>
+        </div>
+
+        <!-- RIGHT SIDE FEATURE SET 1 -->
+        <div class="right-checks">
+
+            <div class="check-item"><span style="color: green;" >✔ </span>Access to advanced workouts</div>
+            <div class="check-item"><span style="color: green;" >✔ </span> Group challenges</div>
+            <div class="check-item"><span style="color: green;" >✔ </span> All resources</div>
+            <div class="check-item"><span style="color: green;" >✔ </span>Nutrition tracking</div>
+            <div class="check-item"><span style="color: green;" >✔ </span> Trainer support</div>
+
+        </div>
+
+    </div>
+    
+
+    <!-- SEPARATED RIGHT SIDE FEATURE SET (OUTSIDE CARD) -->
+    <div class="extra-features">
+        <div class="check-item"><span style="color: green;" >✔ </span>Daily Guided Workouts</div>
+        <div class="check-item"><span style="color: green;" >✔ </span> Nutrition & Meal Plans</div>
+        <div class="check-item"><span style="color: green;" >✔ </span> Weekly Progress Tracking</div>
+        <div class="check-item"><span style="color: green;" >✔ </span> Motivational Challenges</div>
+        <div class="check-item"><span style="color: green;" >✔ </span> Expert Tips & Coaching</div>
+    </div>
+
+
+    <!-- Payment Selection Dropdown -->
+    <div class="payment-box" onclick="toggleDropdown()">
+        <h3>Payment Selection</h3>
+        <span id="arrow" class="arrow">▼</span>
+    </div>
+
+    <div class="options" id="dropdown">
+          <div class="option-item" onclick="toggleCardForm()">
+        Credit Card <img src="image/cc.png" alt="cc" width="30">
+    </div>
+        <div class="option-item">Debit Card <img src="image/dc.png" alt="dc"></div>
+        <div class="option-item">Google Pay <img src="image/gp.png" alt="gp"></div>
+        <div class="option-item">UPI <img src="image/upi.png" alt="upi"></div>
+    </div>
+
+<script>
+    function toggleDropdown(){
+        let dropdown = document.getElementById("dropdown");
+        let arrow = document.getElementById("arrow");
+
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        arrow.classList.toggle("rotate");
+    }
+</script>
+
+   <div id="card-form" class="card-form">
+<div class="form-row">
+    <div class="input-group">
+        <label>Cardholder Name</label>
+        <input id="cardholder" type="text" placeholder="Enter name">
+    </div>
+    <div class="input-group">
+        <label>Card Number</label>
+        <input id="cardnumber" type="text" placeholder="xxxx xxxx xxxx xxxx">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="input-group">
+        <label>Expiry Date</label>
+        <input id="expiry" type="text" placeholder="MM/YY">
+    </div>
+    <div class="input-group">
+        <label>CVC</label>
+        <input id="cvc" type="text" placeholder="123">
+    </div>
+    <div id="successPopup" class="success-box"><span style="color: red;">✔</span> Payment Successful!<br>
+    Order has been Placed</div>
+</div>
+
+        <button class="proceed-btn" onclick="submitPayment()">Proceed</button>
+<script>
+function toggleDropdown(){
+    let dropdown = document.getElementById("dropdown");
+    let arrow = document.getElementById("arrow");
+
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    arrow.classList.toggle("rotate");
+}
+
+function toggleCardForm(){
+    let form = document.getElementById("card-form");
+    let paymentBox = document.querySelector(".payment-box");
+    let dropdown = document.getElementById("dropdown");
+
+    // Show form and hide payment selection
+    form.style.display = "block";
+    paymentBox.style.display = "none";
+    dropdown.style.display = "none";
+}
+
+
+// Validation Logic
+document.querySelector(".proceed-btn").addEventListener("click", function () {
+    let valid = true;
+
+    // Fields
+    let nameField = document.querySelector("#cardholder");
+    let numberField = document.querySelector("#cardnumber");
+    let expiryField = document.querySelector("#expiry");
+    let cvcField = document.querySelector("#cvc");
+
+    // Remove old errors
+    document.querySelectorAll(".error").forEach(e => e.remove());
+
+    // Validation: Cardholder Name
+    if (!/^[A-Za-z ]{3,}$/.test(nameField.value)) {
+        showError(nameField, "Enter a valid cardholder name (letters only)");
+        valid = false;
+    }
+
+    // Validation: Card Number (16 digits)
+    if (!/^\d{16}$/.test(numberField.value)) {
+        showError(numberField, "Card number must be 16 digits");
+        valid = false;
+    }
+
+    // Validation: Expiry Format + Expired Check
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryField.value)) {
+        showError(expiryField, "Invalid expiry format (MM/YY)");
+        valid = false;
+    } else {
+        let [month, year] = expiryField.value.split("/");
+        let now = new Date();
+        let expDate = new Date(`20${year}`, month);
+
+        if (expDate <= now) {
+            showError(expiryField, "Card has expired");
+            valid = false;
+        }
+    }
+
+    // Validation: CVC
+    if (!/^\d{3,4}$/.test(cvcField.value)) {
+        showError(cvcField, "CVC must be 3 or 4 digits");
+        valid = false;
+    }
+
+    if (valid) {
+        alert("Payment details validated successfully.");
+    }
+});
+
+
+// Utility: display validation message
+function showError(inputField, message) {
+    let error = document.createElement("div");
+    error.className = "error";
+    error.style.color = "red";
+    error.style.fontSize = "13px";
+    error.style.marginTop = "4px";
+    error.textContent = message;
+    inputField.parentNode.appendChild(error);
+}
+</script>
+<script>
+document.querySelector(".proceed-btn").addEventListener("click", function () {
+
+    // show success popup
+    document.getElementById("successPopup").style.display = "block";
+
+    // auto hide after 3 seconds then redirect
+    setTimeout(() => {
+        document.getElementById("successPopup").style.display = "none";
+        window.location.href = "program.html";   // <-- change page URL here
+    }, 3000);
+
+});
+</script>
+
+   </div>
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 - Logo -->
+        <div class="footer-col">
+            <img src="image/logo.png" class="footer-logo" alt="Logo">
+        </div>
+
+        <!-- Column 2 - About Us -->
+        <div class="footer-col">
+            <h3>About Us</h3>
+            <ul>
+                <li>Who We Are</li>
+                <li>Our Mission</li>
+                <li>How It Works</li>
+                <li>Success</li>
+                <li>Courses</li>
+            </ul>
+        </div>
+
+        <!-- Column 3 - Quick Links -->
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Browse</li>
+                <li>Packages</li>
+                <li>Categories</li>
+                <li>Support</li>
+                <li>Blog</li>
+            </ul>
+        </div>
+
+        <!-- Column 4 - Feature -->
+        <div class="footer-col">
+            <h3>Feature</h3>
+            <ul>
+                <li>HIIT</li>
+                <li>Strength Yoga</li>
+                <li>Cardio</li>
+                <li>Cycling</li>
+            </ul>
+        </div>
+
+        <!-- Column 5 - Contact Info -->
+        <div class="footer-col">
+            <h3>Contact & Social</h3>
+            <p>123 Saik Street,Chennai,TN</p>
+            <p>+91-7867980-688</p>
+            <p>Fitness@Fitnesscenter.com</p>
+
+            
+        </div>
+
+        <!-- Column 6 - Social Media -->
+        <div class="footer-col">
+          <img src="image/logo2.png" class="footer-img" alt="Footer Image">
+            <h3>Follow Us</h3>
+            <div class="footer-social">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-google"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Fitness center. All rights reserved.<br>
+        <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

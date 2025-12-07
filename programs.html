@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>programs</title>
+<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+    
+.page-container{
+    display: flex;
+    padding: 20px 40px;
+}
+
+/* LEFT FILTER */
+
+.left-filter{
+    width: 22%;
+}
+
+.left-filter h3{
+    margin-bottom: 15px;
+}
+
+.sidebar-img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* GRID */
+
+.programs-grid{
+    width: 78%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-left: 25px;
+}
+
+/* CARD DESIGN */
+
+.program-card{
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.program-card:hover{
+    transform: translateY(-5px);
+}
+
+.program-card img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.program-card .content{
+    padding: 15px;
+}
+
+.program-card h4{
+    margin-bottom: 5px;
+}
+
+.trainer{
+    color: #e63946;
+}
+
+.price{
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+.program-card button{
+    width: 100%;
+    background: #000;
+    color: white;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.program-card button:hover{
+    background: #e63946;
+}
+/* Filter Header */
+.filter-header {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+/* Hidden Dropdown Panel */
+.filter-dropdown {
+    display: none;
+    background: red;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    width: 250px;
+    margin-top: 10px;
+}
+
+.filter-dropdown h4 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.filter-dropdown label {
+    display: block;
+    margin: 5px 0;
+}
+
+.submit-btn {
+    margin-top: 15px;
+    padding: 8px;
+    width: 100%;
+    background: whte;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: rgb(131, 130, 130);
+    color: black;
+}
+
+/* Animation */
+.filter-dropdown.show {
+    display: block;
+    animation: dropdownFade 0.3s ease-in-out;
+}
+
+@keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.filter-dropdown {
+    display: none;
+}
+.filter-dropdown.show {
+    display: block;
+}
+</style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/logo.png" alt="Logo" />
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html">Home</a>
+      <a href="programs.html"  class="active">Programs</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="subscription.html">Subscriptions</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+ <div class="nav-icons">
+        <img src="image/pp (1).png" class="icon profile" alt="Profile" id="profilePic">
+        
+        <div class="popup-menu" id="popupMenu">
+    <h3>My Accounts</h3>
+    <button class="act-btn">
+    <a href="account.html">Personal Information</a>
+    </button>
+    <button class="act-btn">
+    <a href="program.html">My Program</a>
+    </button>
+    <button class="act-btn">
+    <a href="password.html">Password Manager</a>
+    </button>
+    <button class="act-btn">
+    <a href="logout.html">Logout</a>
+    </button>
+</div>
+<script>
+    const profilePic = document.getElementById('profilePic');
+    const popupMenu = document.getElementById('popupMenu');
+
+    // Toggle popup on click
+    profilePic.addEventListener('click', () => {
+        popupMenu.classList.toggle('show');
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!profilePic.contains(e.target) && !popupMenu.contains(e.target)) {
+            popupMenu.classList.remove('show');
+        }
+    });
+</script>
+        <div class="icon-container">
+  <a href="wishlist.html" class="icon-wrapper" onclick="toggleDot('heartDot', 'heartIcon')">
+    <i class="fa-regular fa-heart icon" id="heartIcon"></i>
+    <span class="notify-dot" id="heartDot"></span>
+  </a>
+
+
+</div>
+<script>
+function toggleDot(dotId, iconId) {
+  const dot = document.getElementById(dotId);
+  const icon = document.getElementById(iconId);
+
+  if (dot.style.display === "block") {
+    dot.style.display = "none";
+    icon.classList.remove("active-heart", "active-cart");
+  } else {
+    dot.style.display = "block";
+    icon.classList.add(iconId === "heartIcon" ? "active-heart" : "active-cart");
+  }
+}
+</script>
+         <button id="notifyBtn" class="notify-btn">
+        <i class="fa-regular fa-bell icon"></i>
+        </button>
+    </div>
+    <!-- Popup Modal -->
+  <div id="notificationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="notification-box">
+       <h3>Program Notification Messages</h3>
+        
+          <p>1.New Program Available<br>
+            New program Alert!<br>
+            Advanced fitneswellness Techniques" is now live. Start learning the latest in worldwide and user flows today.
+        <p>
+      </div>
+    </div>
+  </div>
+ 
+     <script>
+    const modal = document.getElementById("notificationModal");
+    const btn = document.getElementById("notifyBtn");
+    const closeBtn = document.querySelector(".close");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  </script>
+
+  </nav>
+
+<div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search Programs" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid black; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">weight loss program</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    // Replace value on focus
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('searchInput');
+      input.addEventListener('focus', function() {
+        input.value = 'weight loss program';
+      });
+    });
+  </script>
+<div class="page-container">
+
+    <!-- LEFT FILTER PANEL -->
+    <aside class="left-filter">
+      <h3 id="filterToggle" class="filter-header">☰ Filter Categories</h3>
+
+<div id="filterDropdown" class="filter-dropdown">
+
+    <h4>Types of Program</h4>
+   <label><input type="radio" name="type" value="weight"> Weight loss</label>
+    <label><input type="radio" name="type" value="muscle"> Muscle gain</label>
+    <label><input type="radio" name="type" value="flexibility"> Flexibility Mindfulness</label>
+    <label><input type="radio" name="type" value="endurance"> Endurance</label>
+    <label><input type="radio" name="type" value="fitness"> General fitness</label>
+    <label><input type="radio" name="type" value="strength"> Strength training</label>
+
+    <h4>Program Type</h4>
+    <label><input type="radio" name="ptype" value="daily"> Daily workouts</label>
+    <label><input type="radio" name="ptype" value="personal"> Personal Trainings</label>
+    <label><input type="radio" name="ptype" value="corporate"> Corporate wellness</label>
+    <label><input type="radio" name="ptype" value="video"> Video Based Session</label>
+    <label><input type="radio" name="ptype" value="home"> Home workouts</label>
+
+    <h4>Duration</h4>
+    <label><input type="radio" name="duration" value="7days"> 7 Days</label>
+    <label><input type="radio" name="duration" value="14days"> 14 Days</label>
+    <label><input type="radio" name="duration" value="30days"> 30 Days</label>
+    <label><input type="radio" name="duration" value="3month"> 3 Months</label>
+    <label><input type="radio" name="duration" value="ongoing"> Ongoing</label>
+
+    <h4>Subscription Type</h4>
+    <label><input type="radio" name="sub" value="basic"> Basic plan</label>
+    <label><input type="radio" name="sub" value="premium"> Premium plan</label>
+    <label><input type="radio" name="sub" value="standard"> Standard plan</label>
+
+    <h4>Ratings</h4>
+    <label><input type="radio" name="rating" value="5"> ⭐⭐⭐⭐⭐ 5 star</label>
+    <label><input type="radio" name="rating" value="4"> ⭐⭐⭐⭐ 4 star & Above</label>
+
+    <button id="submitFilters" class="submit-btn">Submit</button>
+<script>
+    const toggleBtn = document.getElementById("filterToggle");
+    const dropdown = document.getElementById("filterDropdown");
+    const sidebarImage = document.getElementById("sidebarImage");
+
+    toggleBtn.addEventListener("click", () => {
+        dropdown.classList.toggle("show");
+
+        // Toggle sidebar image visibility
+        sidebarImage.style.display = dropdown.classList.contains("show") ? "none" : "block";
+    });
+
+    // Redirect on submit
+    document.getElementById("submitFilters").addEventListener("click", () => {
+        window.location.href = "filter.html"; 
+    });
+</script>
+
+
+
+</div>
+
+   <img id="sidebarImage" src="image/pr1.png" class="sidebar-img">
+    </aside>
+
+    <!-- PROGRAM CARDS -->
+    <section class="programs-grid">
+
+        <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/Pro1.png" class="product-img1">
+             <h3 class="product-title1" style="text-align: left;">HIIT Fitness</h3>
+            <p class="product-subtitle1" style="text-align: left;color: black;">6 weeks</p>
+            <h3 class="product-title1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Thompson</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+              <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro2.png" class="product-img1">
+                 <h3 class="product-title1">Personal training</h3>
+            <p class="product-subtitle1">6 weeks</p>
+            <h3 class="product-title1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Martine</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+        <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro3.png" class="product-img1">
+            <h3 class="product-title1">Corporate wellness</h3>
+            <p class="product-subtitle1">6 weeks</p>
+            <h3 class="product-subtitle1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Catherine</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+           <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro4.png" class="product-img1">
+             <h3 class="product-title1" style="text-align: left;">Nutrition Program</h3>
+            <p class="product-subtitle1" style="text-align: left;color: black;">6 weeks</p>
+            <h3 class="product-title1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : David</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+              <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro5.png" class="product-img1">
+                 <h3 class="product-title1">Cardio Program</h3>
+            <p class="product-subtitle1">6 weeks</p>
+            <h3 class="product-title1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Catherine</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+        <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro6.png" class="product-img1">
+            <h3 class="product-title1">Health Program</h3>
+            <p class="product-subtitle1">6 weeks</p>
+            <h3 class="product-subtitle1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Andrew</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+
+
+
+
+         <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro7.png" class="product-img1">
+             <h3 class="product-title1" style="text-align: left;">Weight loss program</h3>
+            <p class="product-subtitle1" style="text-align: left;color: black;">6 weeks</p>
+            <h3 class="product-title1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Thompson</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+              <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro8.png" class="product-img1">
+                 <h3 class="product-title1">Strength Training</h3>
+            <p class="product-subtitle1">6 weeks</p>
+            <h3 class="product-title1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Stew</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+        <div class="product-card1">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+           
+            <img src="image/pro9.png" class="product-img1">
+            <h3 class="product-title1">Yoga and Meditation</h3>
+            <p class="product-subtitle1">6 weeks</p>
+            <h3 class="product-subtitle1">Daily 1hour session</h3>
+            <p class="product-subtitle">Trainer : Thompson</p>
+             <p class="product-subtitle">Rupees:2500/Month</p>
+
+            <div class="card-actions">
+                <button class="shop-btn" onclick="window.location.href='subscription.html'">Subscribe</button>
+        
+            </div>
+        </div>
+
+
+
+    </section>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 - Logo -->
+        <div class="footer-col">
+            <img src="image/logo.png" class="footer-logo" alt="Logo">
+        </div>
+
+        <!-- Column 2 - About Us -->
+        <div class="footer-col">
+            <h3>About Us</h3>
+            <ul>
+                <li>Who We Are</li>
+                <li>Our Mission</li>
+                <li>How It Works</li>
+                <li>Success</li>
+                <li>Courses</li>
+            </ul>
+        </div>
+
+        <!-- Column 3 - Quick Links -->
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Browse</li>
+                <li>Packages</li>
+                <li>Categories</li>
+                <li>Support</li>
+                <li>Blog</li>
+            </ul>
+        </div>
+
+        <!-- Column 4 - Feature -->
+        <div class="footer-col">
+            <h3>Feature</h3>
+            <ul>
+                <li>HIIT</li>
+                <li>Strength Yoga</li>
+                <li>Cardio</li>
+                <li>Cycling</li>
+            </ul>
+        </div>
+
+        <!-- Column 5 - Contact Info -->
+        <div class="footer-col">
+            <h3>Contact & Social</h3>
+            <p>123 Saik Street,Chennai,TN</p>
+            <p>+91-7867980-688</p>
+            <p>Fitness@Fitnesscenter.com</p>
+
+            
+        </div>
+
+        <!-- Column 6 - Social Media -->
+        <div class="footer-col">
+          <img src="image/logo2.png" class="footer-img" alt="Footer Image">
+            <h3>Follow Us</h3>
+            <div class="footer-social">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-google"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Fitness center. All rights reserved.<br>
+        <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+

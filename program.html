@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>program</title>
+<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<style>
+
+
+    h1 {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 35px;
+    }
+
+    /* ---------- Hero & Program Card ---------- */
+
+    .program-section {
+        width: 90%;
+        margin: 40px auto;
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .program-card {
+        width: 55%;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    }
+
+    .program-img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+    }
+
+    .program-info {
+        background: red;
+        color: white;
+        padding: 25px;
+        line-height: 1.6;
+        font-size: 18px;
+    }
+
+    .stars {
+        font-size: 25px;
+        margin-top: 15px;
+    }
+
+    /* ---------- Checklist ---------- */
+
+    .text-box {
+        width: 40%;
+        padding-right: 20px;
+    }
+
+    .text-box p {
+        font-size: 17px;
+        color: #444;
+        line-height: 1.6;
+    }
+
+    .whats-title {
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0 10px;
+        font-size: 22px;
+    }
+
+    .checklist {
+        margin-top: 10px;
+    }
+
+    .check-item {
+        font-size: 17px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .check-item span {
+        color: green;
+        font-size: 22px;
+    }
+
+    /* ---------- Subscription Card ---------- */
+.subscription-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 60px auto;
+  font-family: "Poppins", sans-serif;
+}
+
+.subscription-card {
+  width: 65%;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+}
+
+.subscription-card h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.trial-badge {
+  display: inline-block;
+  background: #008CFF;
+  color: white;
+  padding: 7px 18px;
+  border-radius: 5px;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #003399;
+  margin-bottom: 20px;
+  margin-left: -500px;
+}
+
+.progress-chart {
+  width: 240px;
+  height: 250px;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+}
+
+.features li {
+
+  font-size: 15px;
+  display: flex;
+  align-items: right;
+  margin-left: 300px;
+margin-top: -65px;
+ 
+}
+
+.features span {
+  color: #04C200;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.start-btn {
+  background: red;
+  color: white;
+  padding: 20px 40px;
+  border: none;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.start-btn:hover {
+  background: #cc0000;
+}
+
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+        .program-section{
+            flex-direction: column;
+        }
+        .program-card, .text-box{
+            width: 100%;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/logo.png" alt="Logo" />
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="tracking.html">Tracking</a>
+      <a href="subscription.html"class="active">Subscriptions</a>
+      <a href="blogs.html"  >Blogs</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+ <div class="nav-icons">
+        <img src="image/pp (1).png" class="icon profile" alt="Profile" id="profilePic">
+        
+        <div class="popup-menu" id="popupMenu">
+    <h3>My Accounts</h3>
+    <button class="act-btn">
+    <a href="account.html">Personal Information</a>
+    </button>
+    <button class="act-btn">
+    <a href="program.html">My Program</a>
+    </button>
+    <button class="act-btn">
+    <a href="password.html">Password Manager</a>
+    </button>
+    <button class="act-btn">
+    <a href="logout.html">Logout</a>
+    </button>
+</div>
+<script>
+    const profilePic = document.getElementById('profilePic');
+    const popupMenu = document.getElementById('popupMenu');
+
+    // Toggle popup on click
+    profilePic.addEventListener('click', () => {
+        popupMenu.classList.toggle('show');
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!profilePic.contains(e.target) && !popupMenu.contains(e.target)) {
+            popupMenu.classList.remove('show');
+        }
+    });
+</script>
+        <div class="icon-container">
+  <a href="wishlist.html" class="icon-wrapper" onclick="toggleDot('heartDot', 'heartIcon')">
+    <i class="fa-regular fa-heart icon" id="heartIcon"></i>
+    <span class="notify-dot" id="heartDot"></span>
+  </a>
+
+</div>
+<script>
+function toggleDot(dotId, iconId) {
+  const dot = document.getElementById(dotId);
+  const icon = document.getElementById(iconId);
+
+  if (dot.style.display === "block") {
+    dot.style.display = "none";
+    icon.classList.remove("active-heart", "active-cart");
+  } else {
+    dot.style.display = "block";
+    icon.classList.add(iconId === "heartIcon" ? "active-heart" : "active-cart");
+  }
+}
+</script>
+         <button id="notifyBtn" class="notify-btn">
+        <i class="fa-regular fa-bell icon"></i>
+        </button>
+    </div>
+    <!-- Popup Modal -->
+  <div id="notificationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="notification-box">
+       <h3>Program Notification Messages</h3>
+        
+          <p>1.New Program Available<br>
+            New program Alert!<br>
+            Advanced fitneswellness Techniques" is now live. Start learning the latest in worldwide and user flows today.
+        <p>
+      </div>
+    </div>
+  </div>
+ 
+     <script>
+    const modal = document.getElementById("notificationModal");
+    const btn = document.getElementById("notifyBtn");
+    const closeBtn = document.querySelector(".close");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  </script>
+
+  </nav>
+
+<div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search Programs" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid black; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">weight loss program</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    // Replace value on focus
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('searchInput');
+      input.addEventListener('focus', function() {
+        input.value = 'weight loss program';
+      });
+    });
+  </script>
+
+  <br>
+
+
+<h1>My Program and Subscription</h1>
+
+<section class="subscription-section">
+  <div class="subscription-card">
+    
+    <h2>Premium Plan</h2>
+
+    <span class="trial-badge">14 Days Free Trial</span>
+
+    <h3 class="price">$39/Mon</h3>
+
+    <img src="image/graph.png" class="progress-chart" alt="Weekly Progress Chart">
+
+    <ul class="features">
+      <li><span>✔</span> Access to advanced workouts</li>
+      <li><span>✔</span> Group challenges</li>
+      <li><span>✔</span> All Resources</li>
+      <li><span>✔</span> Nutrition tracking</li>
+      <li><span>✔</span> Trainer support</li>
+    </ul>
+
+  </div>
+
+  <button class="start-btn"onclick="window.location.href='filter.html'" >Start program</button>
+  
+</section>
+
+
+<!-- ================= TOP PROGRAM SECTION ================= -->
+
+<div class="program-section">
+
+    <!-- LEFT PROGRAM CARD -->
+    <div class="program-card">
+        <img src="image/sub1.png" class="program-img">
+
+        <div class="program-info">
+            <strong>Weight loss program</strong><br><br>
+            30 Days Duration Period <br><br>
+            Rs.2,500/Month<br><br>
+            Trainer : Sofiya Thompson<br><br>
+            ⭐⭐⭐⭐⭐
+        </div>
+    </div>
+
+    <!-- RIGHT DESCRIPTION -->
+    <div class="text-box">
+        <p>
+            Shed fat, boost energy, and build lifelong<br>
+             healthy habits with our  expertly designed <br>
+             Weight Loss Program. This plan is ideal for <br>
+             individuals aiming to burn calories<br>
+             efficiently, tone their body, and stay <br>
+             motivsted throughout thei journey.
+        </p>
+
+        <div class="whats-title">What's Included</div>
+
+        <div class="checklist">
+            <div class="check-item"><span>✔</span> Daily Guided Workouts</div><br>
+            <div class="check-item"><span>✔</span> Nutrition & Meal Plans</div><br>
+            <div class="check-item"><span>✔</span> Weekly Progress Tracking</div><br>
+            <div class="check-item"><span>✔</span> Motivational Challenges</div><br>
+            <div class="check-item"><span>✔</span> Expert Tips & Coaching</div><br>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 - Logo -->
+        <div class="footer-col">
+            <img src="image/logo.png" class="footer-logo" alt="Logo">
+        </div>
+
+        <!-- Column 2 - About Us -->
+        <div class="footer-col">
+            <h3>About Us</h3>
+            <ul>
+                <li>Who We Are</li>
+                <li>Our Mission</li>
+                <li>How It Works</li>
+                <li>Success</li>
+                <li>Courses</li>
+            </ul>
+        </div>
+
+        <!-- Column 3 - Quick Links -->
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Browse</li>
+                <li>Packages</li>
+                <li>Categories</li>
+                <li>Support</li>
+                <li>Blog</li>
+            </ul>
+        </div>
+
+        <!-- Column 4 - Feature -->
+        <div class="footer-col">
+            <h3>Feature</h3>
+            <ul>
+                <li>HIIT</li>
+                <li>Strength Yoga</li>
+                <li>Cardio</li>
+                <li>Cycling</li>
+            </ul>
+        </div>
+
+        <!-- Column 5 - Contact Info -->
+        <div class="footer-col">
+            <h3>Contact & Social</h3>
+            <p>123 Saik Street,Chennai,TN</p>
+            <p>+91-7867980-688</p>
+            <p>Fitness@Fitnesscenter.com</p>
+
+            
+        </div>
+
+        <!-- Column 6 - Social Media -->
+        <div class="footer-col">
+          <img src="image/logo2.png" class="footer-img" alt="Footer Image">
+            <h3>Follow Us</h3>
+            <div class="footer-social">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-google"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Fitness center. All rights reserved.<br>
+        <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a>
+    </div>
+</footer>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nutrition</title>
+<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+   .meal-plan {
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.meal-plan h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header-row, .row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    padding: 20px 10px;
+    align-items: flex-start;
+}
+
+.header-row {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header-row .col {
+    color: red;
+}
+
+.row .day-col {
+    font-weight: bold;
+    font-size: 18px;
+   
+}
+
+.col {
+    text-align: left;
+}
+
+.col h4 {
+    margin: 8px 0 4px;
+    color: red;
+    font-size: 16px;
+}
+
+.col ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.col li {
+    padding: 3px 0;
+    font-size: 15px;
+}
+
+.col li::before {
+    content: "✔ ";
+    color: #00c853;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .header-row {
+        display: none;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        padding: 15px 0;
+    }
+
+    .col {
+        margin-top: 10px;
+    }
+}
+
+</style>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo" style="text-align:center;">
+      <img src="image/logo.png" alt="Logo" />
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="tracking.html"  class="active">Tracking</a>
+      <a href="subscription.html">Subscriptions</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+
+ <div class="nav-icons">
+        <img src="image/pp (1).png" class="icon profile" alt="Profile" id="profilePic">
+        
+        <div class="popup-menu" id="popupMenu">
+    <h3>My Accounts</h3>
+    <button class="act-btn">
+    <a href="account.html">Personal Information</a>
+    </button>
+    <button class="act-btn">
+    <a href="program.html">My Program</a>
+    </button>
+    <button class="act-btn">
+    <a href="password.html">Password Manager</a>
+    </button>
+    <button class="act-btn">
+    <a href="logout.html">Logout</a>
+    </button>
+</div>
+<script>
+    const profilePic = document.getElementById('profilePic');
+    const popupMenu = document.getElementById('popupMenu');
+
+    // Toggle popup on click
+    profilePic.addEventListener('click', () => {
+        popupMenu.classList.toggle('show');
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!profilePic.contains(e.target) && !popupMenu.contains(e.target)) {
+            popupMenu.classList.remove('show');
+        }
+    });
+</script>
+        <div class="icon-container">
+  <a href="wishlist.html" class="icon-wrapper" onclick="toggleDot('heartDot', 'heartIcon')">
+    <i class="fa-regular fa-heart icon" id="heartIcon"></i>
+    <span class="notify-dot" id="heartDot"></span>
+  </a>
+
+
+</div>
+<script>
+function toggleDot(dotId, iconId) {
+  const dot = document.getElementById(dotId);
+  const icon = document.getElementById(iconId);
+
+  if (dot.style.display === "block") {
+    dot.style.display = "none";
+    icon.classList.remove("active-heart", "active-cart");
+  } else {
+    dot.style.display = "block";
+    icon.classList.add(iconId === "heartIcon" ? "active-heart" : "active-cart");
+  }
+}
+</script>
+         <button id="notifyBtn" class="notify-btn">
+        <i class="fa-regular fa-bell icon"></i>
+        </button>
+    </div>
+    <!-- Popup Modal -->
+  <div id="notificationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="notification-box">
+        <h3>Program Notification Messages</h3>
+        
+          <p>1.New Program Available<br>
+            New program Alert!<br>
+            Advanced fitneswellness Techniques" is now live. Start learning the latest in worldwide and user flows today.
+        <p>
+      </div>
+    </div>
+  </div>
+ 
+     <script>
+    const modal = document.getElementById("notificationModal");
+    const btn = document.getElementById("notifyBtn");
+    const closeBtn = document.querySelector(".close");
+
+    btn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  </script>
+
+  </nav>
+
+<div class="search-bar">
+    <div style="position: relative; display: inline-block; width: 80%; max-width: 450px;">
+      <input id="searchInput" type="text" placeholder="Search Programs" style="width: 100%;padding: 10px 40px 10px 12px; border: 1px solid black; border-radius: 6px;" />
+      <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+      <!-- Suggestions -->
+      <div id="suggestions" style="display:none; position:absolute; top:45px; left:0; width:100%; background:#fff; border:1px solid #ddd; border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:10px; z-index:20;">
+        <p style="margin:0; padding:8px 0; cursor:pointer;">weight loss program</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    // Replace value on focus
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('searchInput');
+      input.addEventListener('focus', function() {
+        input.value = 'weight loss program';
+      });
+    });
+  </script>
+
+ <h1>Daily works</h1>
+
+    <div class="container">
+        
+        <!-- Top Image -->
+        <div class="image-container">
+            <img src="image/n1.png" alt="Fitness Tracker" style="margin-left: 330px;">
+        </div>
+
+        <!-- Radio Button Options -->
+        <div class="options">
+
+            <div class="option">
+                <input type="radio" name="feature" onclick="goToPage('tracking.html')">
+                Weekly Progress Tracking
+            </div>
+<div class="option" style="margin-top: 200px;">
+    <input type="radio" name="feature" class="weekly-radio">
+    Nutrition & Meal Plans
+</div>
+
+            <div class="option">
+                <input type="radio" name="feature" onclick="goToPage('nutrition.html')"   style="margin-left: -70px;">
+                Daily Guided Workouts
+            </div>
+
+            <div class="option">
+                <input type="radio" name="feature" onclick="goToPage('motivation.html')"
+                style="margin-left: -200px;margin-top: 150px;">
+                Motivational Challenges
+            </div>
+
+            <div class="option">
+                <input type="radio" name="feature" onclick="goToPage('coaching.html')"   style="margin-left: 150px;margin-top: 150px;">
+                Expert Tips & Coaching
+            </div>
+
+        </div>
+    </div>
+<script>
+function selectOption(radio) {
+    // Remove active class from all options
+    document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('active');
+    });
+
+    // Add active class to parent div of the clicked radio
+    radio.parentElement.classList.add('active');
+}
+
+function goToPage(url) {
+    window.location.href = url;
+}
+</script>
+
+    <script>
+        function goToPage(url) {
+            window.location.href = url;
+        }
+    </script>
+
+
+
+<section class="meal-plan">
+    <h2>Weekly Meal Plan Overview</h2>
+
+    <div class="table-container">
+
+        <div class="header-row">
+            <div class="col day-col" >Day</div>
+         
+        </div>
+
+        <!-- Monday -->
+        <div class="row">
+            <div class="col day-col">Monday <br><br><br>
+            Tuesday <br><br><br>
+        Wednesday<br><br><br>
+    Thursday<br><br><br>
+Friday <br><br><br>
+Saturday <br><br><br>
+Sunday</div>
+
+            <div class="col">
+                <h4>Breakfast</h4>
+                <ul>
+                    <li>Oatmeal + Berries</li>
+                    <li>Avocado Toast + Egg</li>
+                    <li>Smoothie Bowl</li>
+                     <li>Scrambled Eggs + Toast</li>
+                      <li>Protein Pancakes</li>
+                       <li>Yogurt Parfait</li>
+                        <li>Banana Protein Shake</li>
+                </ul>
+                <h4>Lunch</h4>
+                <ul>
+                    <li>Grilled Chicken Salad</li>
+                    <li>Tuna Salad Wrap</li>
+                     <li>Chickpea Salad</li>
+                      <li>Lentil Soup + Bread</li>
+                       <li>CHicken Caesar Salad</li>
+                        <li>Quinoa Tabbouleh Bowl</li>
+                         <li>Baked Sweet Potato</li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h4>Dinner</h4>
+                <ul>
+                    <li>Quinoa + Veggie Stir-fry</li>
+                    <li>Brown Rice + Salmon</li>
+                     <li>Grilled Turkey Breast</li>
+                      <li>Zucchini Noodles + Tofu</li>
+                       <li>Pasta + Lean Meat Sauce</li>
+                        <li>Veggie Tacos</li>
+                         <li>Stir-fried Chicken + Rice</li>
+                </ul>
+                <h4>Snack Ideas</h4>
+                <ul>
+                    <li>Greek Yogurt + Nuts</li>
+                    <li>Apple Slices + Peanut Butter</li>
+                     <li>Protein Bar</li>
+                      <li>Carrot Sticks + Hummus</li>
+                       <li>Handful of Almonds</li>
+                        <li>Rice Cakes + Avocado</li>
+                         <li>Cottage Cheese + Fruit</li>
+                </ul>
+            </div>
+        </div>
+
+        
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<br>
+
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 - Logo -->
+        <div class="footer-col">
+            <img src="image/logo.png" class="footer-logo" alt="Logo">
+        </div>
+
+        <!-- Column 2 - About Us -->
+        <div class="footer-col">
+            <h3>About Us</h3>
+            <ul>
+                <li>Who We Are</li>
+                <li>Our Mission</li>
+                <li>How It Works</li>
+                <li>Success</li>
+                <li>Courses</li>
+            </ul>
+        </div>
+
+        <!-- Column 3 - Quick Links -->
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li>Browse</li>
+                <li>Packages</li>
+                <li>Categories</li>
+                <li>Support</li>
+                <li>Blog</li>
+            </ul>
+        </div>
+
+        <!-- Column 4 - Feature -->
+        <div class="footer-col">
+            <h3>Feature</h3>
+            <ul>
+                <li>HIIT</li>
+                <li>Strength Yoga</li>
+                <li>Cardio</li>
+                <li>Cycling</li>
+            </ul>
+        </div>
+
+        <!-- Column 5 - Contact Info -->
+        <div class="footer-col">
+            <h3>Contact & Social</h3>
+            <p>123 Saik Street,Chennai,TN</p>
+            <p>+91-7867980-688</p>
+            <p>Fitness@Fitnesscenter.com</p>
+
+            
+        </div>
+
+        <!-- Column 6 - Social Media -->
+        <div class="footer-col">
+          <img src="image/logo2.png" class="footer-img" alt="Footer Image">
+            <h3>Follow Us</h3>
+            <div class="footer-social">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-google"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Fitness center. All rights reserved.<br>
+        <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
